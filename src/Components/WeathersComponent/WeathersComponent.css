@@ -1,0 +1,37 @@
+.Wrapper {
+  width: 250px;
+  height: auto;
+  background-color: darkslateblue;
+  padding: 10px;
+}
+
+.Content {
+  margin-bottom: 20px;
+}
+
+.Title {
+  color: white;
+  border-bottom: 1px solid white;
+}
+p {
+  color: white;
+  text-align: left;
+}
+h3 {
+  text-align: left;
+}
+
+span {
+  font-weight: bold;
+}
+
+button {
+  color: black;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  padding: 4px;
+  background-color: white;
+  width: 100%;
+  cursor: pointer;
+}

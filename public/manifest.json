@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name":"weather",
+  "description": "this is a weather chrome extension",
+  "version": "0.0.1",
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Open"
+  },
+  "icons":{
+    "16":"./weather.png"
+  },
+ 
+  "permissions": ["scripting"],
+  "host_permissions": [
+    "http://*/",
+    "https://*/"
+  ]
+}
