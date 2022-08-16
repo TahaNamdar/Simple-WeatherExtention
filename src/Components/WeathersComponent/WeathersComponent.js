@@ -69,7 +69,7 @@ export default function WeathersComponent() {
       <div className="Title">
         <img src="./logo.png" className="logo" />
         <h4 style={{ color: "gold" }}>{state.titleTarget}</h4>
-        <h6>{state.urlTarget}</h6>
+        <h6>{state.urlTarget.split("?")[0]}</h6>
       </div>
       <div className="Content">
         {data &&
