@@ -12,6 +12,7 @@ export default function WeathersComponent() {
       const actualData = await fetch(API).then((response) => response.json());
       setData(actualData);
     }
+
     getData();
   }, []);
 
@@ -59,29 +60,39 @@ export default function WeathersComponent() {
   }
 
   function mainAction() {
-    chrome.storage.sync.set({ "state": state });
+    chrome.storage.sync.set({ state: state });
     btnAction();
   }
 
   return (
     <div className="Wrapper">
       <div className="Title">
-        <h2>Weather extension</h2>
-        <h3 style={{ color: "yellow" }}>{state.titleTarget}</h3>
-        <h4>{state.urlTarget}</h4>
+        <img src="./logo.png" className="logo" />
+        <h4 style={{ color: "gold" }}>{state.titleTarget}</h4>
+        <h6>{state.urlTarget}</h6>
       </div>
       <div className="Content">
-        <p>
-          <span>city name</span> : {data && data.name}
-        </p>
-        <p>
-          <span>Temp</span> :{" "}
-          {data && Math.round(Number(data.main.temp) - 273.15)} C
-        </p>
         {data &&
           data.weather.map((item) => {
             return (
               <div>
+                <div className="section">
+                  <p>
+                    <span>Temp</span> :{" "}
+                    {data && Math.round(Number(data.main.temp) - 273.15)} C
+                  </p>
+                  <img
+                    src={
+                      "https://api.openweathermap.org/img/w/" +
+                      item.icon +
+                      ".png"
+                    }
+                  />
+                </div>
+                <p>
+                  <span>city name</span> : {data && data.name}
+                </p>
+
                 <p>
                   <span>weather</span> : {item.main}
                 </p>

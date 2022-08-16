@@ -1,8 +1,14 @@
 .Wrapper {
   width: 250px;
   height: auto;
-  background-color: #293462;
+  background-color: #191a2e;
   padding: 10px;
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .domStyle {
@@ -25,12 +31,18 @@ p {
   text-align: left;
 }
 
+.logo {
+  width: 100%;
+  border-radius: 8px;
+}
+
 span {
   font-weight: bold;
+  color: gold;
 }
 
 button {
-  color: black;
+  color: #191a2e;
   border: none;
   border-radius: 4px;
   font-size: 16px;
