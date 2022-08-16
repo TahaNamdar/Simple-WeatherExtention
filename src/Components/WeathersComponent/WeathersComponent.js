@@ -5,12 +5,11 @@ export default function WeathersComponent() {
   const [data, setData] = useState(null);
   const [state, setState] = useState({ urlTarget: "", titleTarget: "" });
 
+  const API = `https://api.openweathermap.org/data/2.5/weather?q=tehran&appid=fc23c7530f93e9a5b87c232a3aff81df`;
+
   useEffect(() => {
     async function getData() {
-      const actualData = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=tehran&appid=fc23c7530f93e9a5b87c232a3aff81df`
-      ).then((response) => response.json());
-
+      const actualData = await fetch(API).then((response) => response.json());
       setData(actualData);
     }
     getData();
@@ -25,22 +24,6 @@ export default function WeathersComponent() {
       setState({ urlTarget, titleTarget });
     });
   }, []);
-
-  function btnAction() {
-    /* eslint-disable no-undef */
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      const activeTabId = tabs[0].id;
-      chrome.scripting.executeScript({
-        target: { tabId: activeTabId },
-        function: elementGenerator,
-      });
-    });
-  }
-
-  function mainAction() {
-    chrome.storage.sync.set({ "state": state });
-    btnAction();
-  }
 
   function elementGenerator() {
     chrome.storage.get("state", ({ state }) => {
@@ -62,6 +45,22 @@ export default function WeathersComponent() {
 
   function insertAfter(referenceNode, newNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  }
+
+  function btnAction() {
+    /* eslint-disable no-undef */
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      const activeTabId = tabs[0].id;
+      chrome.scripting.executeScript({
+        target: { tabId: activeTabId },
+        function: elementGenerator,
+      });
+    });
+  }
+
+  function mainAction() {
+    chrome.storage.sync.set({ "state": state });
+    btnAction();
   }
 
   return (
