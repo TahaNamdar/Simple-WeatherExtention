@@ -26,23 +26,43 @@ export default function WeathersComponent() {
     });
   }, []);
 
-  function BtnAction() {
+  function btnAction() {
     /* eslint-disable no-undef */
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const activeTabId = tabs[0].id;
       chrome.scripting.executeScript({
         target: { tabId: activeTabId },
-        function: () => {
-          let test = document.createElement("div");
-          test.textContent = "Hello from test";
-          test.setAttribute("class", "domStyle");
-          document.body.insertBefore(test, document.body.firstChild);
-        },
+        function: elementGenerator,
       });
     });
   }
 
-  console.log(data, "data!");
+  function mainAction() {
+    chrome.storage.sync.set({ "state": state });
+    btnAction();
+  }
+
+  function elementGenerator() {
+    chrome.storage.get("state", ({ state }) => {
+      let child = document.createElement("div", {}, "children");
+      let title = document.createElement("h5", "title");
+      let url = document.createElement("h5", "url");
+      title.innerHTML = `title:${state.title}`;
+      url.innerHTML = `url:${state.url}`;
+      child.setAttribute(
+        "style",
+        "background-color:#293462,width:100%,height:40px,position:fixed"
+      );
+      child.appendChild(title);
+      child.appendChild(url);
+      const referenceNode = document.body.lastChild;
+      insertAfter(referenceNode, child);
+    });
+  }
+
+  function insertAfter(referenceNode, newNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  }
 
   return (
     <div className="Wrapper">
@@ -73,7 +93,7 @@ export default function WeathersComponent() {
             );
           })}
       </div>
-      <button onClick={BtnAction}>Inject</button>
+      <button onClick={mainAction}>Inject</button>
     </div>
   );
 }
