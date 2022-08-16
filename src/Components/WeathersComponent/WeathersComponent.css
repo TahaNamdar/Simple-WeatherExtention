@@ -1,8 +1,14 @@
 .Wrapper {
   width: 250px;
   height: auto;
-  background-color: darkslateblue;
+  background-color: #293462;
   padding: 10px;
+}
+
+.domStyle {
+  background-color: blueviolet !important;
+  color: white !important;
+  height: 30px !important;
 }
 
 .Content {
@@ -12,12 +18,10 @@
 .Title {
   color: white;
   border-bottom: 1px solid white;
+  text-align: center !important;
 }
 p {
   color: white;
-  text-align: left;
-}
-h3 {
   text-align: left;
 }
 
